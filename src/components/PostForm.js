@@ -3,11 +3,30 @@ import React from 'react';
 export default class PostForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      title: '',
+    };
   }
 
   submitHandler = (event) => {
     event.preventDefault();
+
+    const { title } = this.state;
+    const newPost = { title, id: Date.now().toString() };
+    console.log(newPost);
+
+    this.setState({
+      title: '',
+    });
+  };
+
+  changInputHandler = (event) => {
+    this.setState((prev) => ({
+      ...prev,
+      ...{
+        [event.target.name]: event.target.value,
+      },
+    }));
   };
 
   render() {
@@ -20,6 +39,9 @@ export default class PostForm extends React.Component {
             className="form-control"
             id="title"
             placeholder="Enter the Post title"
+            value={this.state.title}
+            name="title"
+            onChange={this.changInputHandler}
           />
           <button className="btn btn-success" type="submit">
             Add new Post
