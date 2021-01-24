@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ posts }) => {
+const FetchPosts = ({ posts }) => {
   if (!posts.length) {
     return <h5 className="text-center">There is no any post here... yet...</h5>;
   }
@@ -10,3 +10,5 @@ export default ({ posts }) => {
     </div>
   );
 };
+
+export default FetchPosts;
