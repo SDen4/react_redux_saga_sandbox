@@ -1,16 +1,27 @@
 import React from 'react';
-import Post from './Post';
+import { useDispatch, useSelector } from 'react-redux';
 
-const FetchPosts = ({ posts }) => {
+import Post from './Post';
+import { fetchPost } from '../redux/actions';
+
+const FetchPosts = () => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.fetchedPosts);
+
   if (!posts.length) {
     return (
       <>
         <h5>There is no any post here... yet...</h5>
-        <button className="btn btn-primary">Download</button>
+        <button
+          onClick={() => dispatch(fetchPost())}
+          className="btn btn-primary"
+        >
+          Download
+        </button>
       </>
     );
   }
-  return posts.map((post) => <Post post={post} key={post} />);
+  return posts.map((post) => <Post post={post} key={post.id} />);
 };
 
 export default FetchPosts;
