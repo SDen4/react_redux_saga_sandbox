@@ -5,13 +5,14 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from './redux/rootReduces';
+import forbiddenWordsMiddleware from './redux/middleware';
 
 import App from './App';
 
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunk, forbiddenWordsMiddleware),
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
       window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),
